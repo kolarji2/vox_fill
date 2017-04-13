@@ -4,6 +4,7 @@ Small application for filling small empty holes in otherwise very porous 3D voxe
 ## Installation
 	cmake .
 	make
+	sudo cp vox_fill /usr/local/bin/
 
 ## Usage
  use --help option to inform about usage
