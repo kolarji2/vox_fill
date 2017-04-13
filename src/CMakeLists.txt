@@ -1,0 +1,8 @@
+set (CMAKE_CXX_FLAGS "-O3")
+file (GLOB _sources *.c*)
+add_executable(vox_fill ${_sources})
+target_link_libraries (vox_fill boost_program_options)
+set(VTK_DIR "/usr/include/vtk")
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
+target_link_libraries(vox_fill ${VTK_LIBRARIES})
