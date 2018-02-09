@@ -50,7 +50,7 @@ vtkSmartPointer<vtkStructuredPoints> Vox_fill::load_voxel_vtk (string file_name,
 	}
 	return data;
 	}
-vector<vector<vector<int>>> Vox_fill::fill_holes_vtk (vector<vector<vector<int>>> &arr) {
+vector<vector<vector<int>>> Vox_fill::fill_holes_vtk_find_cells (vector<vector<vector<int>>> &arr) {
 	cout << "Filling holes ..." << endl;
 	int i,j,k,dim,nfill;
 	bool isfoamcell;
@@ -100,13 +100,13 @@ void Vox_fill::fill_area (vector<vector<vector<int>>> &fill0,vector<vector<vecto
 	}
 bool Vox_fill::is_foam_cell(vector<vector<vector<int>>> &arr,vector<int> c){
 	int i0,i1,j0,j1,k0,k1,i,j,k,dim;
-	i0 = c[0] - radius;
-    j0 = c[1] - radius;
-    k0 = c[2] - radius;
+	i0 = c[0];
+    j0 = c[1];
+    k0 = c[2];
     dim=arr.size();
-    for (i=-radius;i<radius;i++) {
-	for (j=-radius;j<radius;j++) {
-	for (k=-radius;k<radius;k++) {
+    for (i=-radius;i<=radius;i++) {
+	for (j=-radius;j<=radius;j++) {
+	for (k=-radius;k<=radius;k++) {
 		i1=mod(i0+i,dim);
         j1=mod(j0+j,dim);
         k1=mod(k0+k,dim);
@@ -143,6 +143,7 @@ void Vox_fill::write_to_file(string file_name, vector<vector<vector<int>>> arr) 
     double totvox=0;
     dim=arr.size();
     ofstream fout (file_name);
+    fout << dim << endl << '#' << endl;
     for (i=0;i<dim;i++) {
 	for (j=0;j<dim;j++) {
 	for (k=0;k<dim;k++) {       
@@ -153,7 +154,7 @@ void Vox_fill::write_to_file(string file_name, vector<vector<vector<int>>> arr) 
     }
     fout << endl;
     }
-    fout << endl << endl;
+    fout << '#' << endl;
     }
     cout << "Foam porosity: " << 1-setvox/totvox << endl;	
 	}

@@ -45,7 +45,7 @@ int main (int argc, char* argv[])
 		if (vm.count ("input-file")) {
 			vector<vector<vector<int>>> arr;
 			auto data=voxfill.load_voxel_vtk(vm["input-file"].as<string>(),arr);
-			auto farr=voxfill.fill_holes_vtk(arr);
+			auto farr=voxfill.fill_holes_vtk_find_cells(arr);
 			if (vm["format"].as<string>()=="txt")				
 				voxfill.write_to_file(vm["output-file"].as<string>(),farr);
 			else

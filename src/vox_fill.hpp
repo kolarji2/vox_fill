@@ -26,7 +26,8 @@ public:
 
 	Vox_fill (int stepval,int radiusval);
 	vtkSmartPointer<vtkStructuredPoints> load_voxel_vtk (string file_name,vector<vector<vector<int>>> &arr);
-	vector<vector<vector<int>>> fill_holes_vtk (vector<vector<vector<int>>> &arr);
+	vector<vector<vector<int>>> fill_holes_vtk_find_cells (vector<vector<vector<int>>> &arr);
+	//vector<vector<vector<int>>> fill_holes_vtk_find_border (vector<vector<vector<int>>> &arr);
 	void write_to_vtk(string file_name,vtkSmartPointer<vtkStructuredPoints> data, vector<vector<vector<int>>> arr);
 	void write_to_file(string file_name, vector<vector<vector<int>>> arr);
 
